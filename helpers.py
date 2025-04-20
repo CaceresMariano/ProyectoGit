@@ -4,12 +4,12 @@ from termcolor import cprint
 
 
 def mostrar_menu():
-    cprint("\n=== MENÚ DE EMPLEADOS ===", "cyan", attrs=["bold"])
-    cprint("1. Agregar empleado", "green")
-    cprint("2. Consultar empleado", "yellow")
-    cprint("3. Modificar empleado", "blue")
-    cprint("4. Eliminar empleado", "red")
-    cprint("0. Salir", "magenta")
+    cprint("\n📋  MENÚ DE EMPLEADOS", "cyan", attrs=["bold"])
+    cprint("1️⃣  ➕ Agregar empleado", "green")
+    cprint("2️⃣  🔍 Consultar empleado", "yellow")
+    cprint("3️⃣  📝 Modificar empleado", "blue")
+    cprint("4️⃣  ❌ Eliminar empleado", "red")
+    cprint("0️⃣  🚪 Salir", "magenta")
 
 
 def menu():
@@ -27,7 +27,7 @@ def menu():
             case "4":
                 pass
             case "0":
-                cprint("Saliendo del programa...", "magenta", attrs=["bold"])
+                cprint("👋Saliendo del programa...", "magenta", attrs=["bold"])
                 break
             case _:  # Este es el "else" de match-case
                 cprint("Opción no válida. Intente de nuevo.", "red")
