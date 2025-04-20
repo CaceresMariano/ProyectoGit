@@ -1,1 +1,9 @@
-print("Hello Python!")
+from inicio import menu
+
+
+def run():
+    menu()
+
+
+if __name__ == '__main__':
+    run()
