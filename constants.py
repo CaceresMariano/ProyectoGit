@@ -1,2 +1,2 @@
-ADD = '✅'
-NOT_ADD = '❌'
+ADD = "✅"
+NOT_ADD = "❌"

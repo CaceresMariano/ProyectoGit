@@ -1,6 +1,9 @@
-import os
-from time import sleep
 from termcolor import cprint
+
+from employees import add_employed, view_employed, update_employed, delete_employed
+from utils import clear_console, sleep_menu
+
+
 
 
 def mostrar_menu():
@@ -14,21 +17,22 @@ def mostrar_menu():
 
 def menu():
     while True:
+        clear_console()
         mostrar_menu()
         opcion = input("Seleccione una opción: ")
 
         match opcion:
             case "1":
-                pass
+                add_employed()
             case "2":
-                pass
+                view_employed()
             case "3":
-                pass
+                update_employed()
             case "4":
-                pass
+                delete_employed()
             case "0":
                 cprint("👋Saliendo del programa...", "magenta", attrs=["bold"])
                 break
             case _:  # Este es el "else" de match-case
                 cprint("Opción no válida. Intente de nuevo.", "red")
-                sleep(2)                
+                sleep_menu(2)
