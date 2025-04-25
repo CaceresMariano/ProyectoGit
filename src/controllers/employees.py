@@ -1,18 +1,19 @@
 from typing import Optional
 
-from data import employees_db
-from utils import clear_console, sleep_menu
-from constants import CHEQUEADO, NO_CHEQUEADO
+from src.data.data import employees_db
+from src.helpers.helpers import clear_console, sleep_menu
+from src.config.constants import CHEQUEADO, NO_CHEQUEADO
 
 
 def view_employed():
     clear_console()
     if not __check_employee():
-       return
+       return print("No hay mas empleados en la base de datos.")
     employee = __find_employee()
     if employee is None:
         return
     print(employee)
+    sleep_menu(2)
 
 
 def add_employed():
@@ -57,13 +58,11 @@ def update_employed():
     if new_check:
         employee["apto"] = CHEQUEADO if new_check.lower(
         ) == "si" else NO_CHEQUEADO
-
+    print("Datos del empleado actualizados con exito.")
     sleep_menu(1)
 
 def delete_employed():
-    clear_console()
-    if not __check_employee():
-       return
+    clear_console()    
     view_employed()
     option = int(
         input(f"Elija el numero del empleado a eliminar [1- {len(employees_db)}]: "))
@@ -74,13 +73,19 @@ def delete_employed():
 def __check_employee():
     if not employees_db:
         print("No se han cargado empleados en los registros")
-        sleep_menu(1)
+        sleep_menu(2)
         return False
     return True
 
+def list_employeed():
+    clear_console()
+    for index, employees in enumerate(employees_db, start=1):
+        print(f"{index}- {employees["nombre"]}, {employees["apellido"]}")
+    
 
 def __find_employee() -> Optional[dict]:
-    view_employed()
+    __check_employee
+    list_employeed()
     option = int(
         input(f"Elija un empleado de la lista [1- {len(employees_db)}]: "))
     for index, employees in enumerate(employees_db, start=1):

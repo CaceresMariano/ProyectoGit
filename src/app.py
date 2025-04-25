@@ -1,21 +1,10 @@
 from termcolor import cprint
 
-from employees import add_employed, view_employed, update_employed, delete_employed
-from utils import clear_console, sleep_menu
+from src.controllers.employees import add_employed, view_employed, update_employed, delete_employed
+from src.helpers.helpers import clear_console, sleep_menu
+from src.helpers.helpers import mostrar_menu
 
-
-
-
-def mostrar_menu():
-    cprint("\n📋  MENÚ DE EMPLEADOS", "cyan", attrs=["bold"])
-    cprint("1️⃣  ➕ Agregar empleado", "green")
-    cprint("2️⃣  🔍 Consultar empleado", "yellow")
-    cprint("3️⃣  📝 Modificar empleado", "blue")
-    cprint("4️⃣  ❌ Eliminar empleado", "red")
-    cprint("0️⃣  🚪 Salir", "magenta")
-
-
-def menu():
+def run():
     while True:
         clear_console()
         mostrar_menu()

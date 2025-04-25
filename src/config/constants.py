@@ -1,0 +1,2 @@
+CHEQUEADO = "✅"
+NO_CHEQUEADO = "❌"

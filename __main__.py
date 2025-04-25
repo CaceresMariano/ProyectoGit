@@ -1,8 +1,4 @@
-from helpers import menu
-
-
-def run():
-    menu()
+from src.app import run
 
 
 if __name__ == '__main__':
