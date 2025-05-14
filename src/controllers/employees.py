@@ -1,13 +1,13 @@
 from typing import Optional
 
 from src.data.data import employees_db
-from src.helpers.helpers import clear_console, sleep_menu
+from src.helpers.helpers import clear_console, sleep_menu, get_string, get_int
 from src.config.constants import CHEQUEADO, NO_CHEQUEADO
 
 
 def view_employed():
     if not __check_employee():
-       return print("No hay mas empleados en la base de datos.")
+        return print("No hay mas empleados en la base de datos.")
     employee = __find_employee()
     if employee is None:
         return
@@ -17,15 +17,15 @@ def view_employed():
 
 def add_employed():
     clear_console()
-    name: str = input("Nombre: ")
-    last_name: str = input("Apellido: ")
-    dni: str = input("DNI: ").zfill(8)
-    position: str = input("Puesto: ")
+    name: str = get_string("Nombre: ", accept_blank=False)
+    last_name: str = get_string("Apellido: ", accept_blank=False)
+    dni: str = get_int("DNI: ", accept_blank=False)
+    position: str = get_string("Puesto: ", accept_blank=False)
     check: str = input("Apto fisico con estudios (si), sin estudios (no): ")
     employee = {
         "nombre": name,
         "apellido": last_name,
-        "dni": f"{dni[:2]}.{dni[2:5]}.{dni[5:]}",
+        "dni": dni,
         "puesto": position,
         "apto": CHEQUEADO if check.lower() == "si" else NO_CHEQUEADO
     }
@@ -33,10 +33,11 @@ def add_employed():
     print(f"Empleado agregado!")
     sleep_menu(1)
 
+
 def update_employed():
     clear_console()
     if not __check_employee():
-       return
+        return
     employee = __find_employee()
     if employee is None:
         return
@@ -59,6 +60,7 @@ def update_employed():
         ) == "si" else NO_CHEQUEADO
     print("Datos del empleado actualizados con exito.")
     sleep_menu(1)
+
 
 def delete_employed():
     if __check_employee():
@@ -85,7 +87,7 @@ def list_employeed():
     __check_employee()
     for index, employees in enumerate(employees_db, start=1):
         print(f"{index}- {employees["nombre"]}, {employees["apellido"]}")
-    
+
 
 def __find_employee() -> Optional[dict]:
     list_employeed()
