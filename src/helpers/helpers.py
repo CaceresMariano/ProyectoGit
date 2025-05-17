@@ -55,7 +55,6 @@ def get_bool(message: str, accept_blank: bool = True) -> Optional[bool]:
     try:
         # código que puede fallar
         data = get_string(message, accept_blank).upper()
-        print(data)
         if not data and accept_blank:
             None
         if data not in VALID_ARGUMENTS:
