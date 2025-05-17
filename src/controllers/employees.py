@@ -57,8 +57,10 @@ def update_employed():
 def delete_employed():
     if __check_employee():
         list_employeed()
-        option = int(
-            input(f"Elija el numero del empleado a eliminar [1- {len(employees_db)}]: "))
+        option = get_int(
+            f"Elija el numero del empleado a eliminar [1- {len(employees_db)}]: ",
+            accept_blank=True
+        )
         register_deleted = employees_db.pop(option - 1)
         if register_deleted:
             print(
@@ -83,8 +85,10 @@ def list_employeed():
 
 def __find_employee() -> Optional[dict]:
     list_employeed()
-    option = int(
-        input(f"Elija un empleado de la lista [1- {len(employees_db)}]: "))
+    option = get_int(
+        f"Elija un empleado de la lista [1- {len(employees_db)}]: ",
+        accept_blank=False
+    )
     for index, employees in enumerate(employees_db, start=1):
         if option == index:
             return employees

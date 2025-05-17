@@ -53,14 +53,15 @@ def get_int(message: str, accept_blank: bool = True) -> Optional[int]:
 def get_bool(message: str, accept_blank: bool = True) -> Optional[bool]:
     VALID_ARGUMENTS = ("SI", "NO", "S", "N")
     try:
-        data = get_string(message, accept_blank)  # código que puede fallar
+        # código que puede fallar
+        data = get_string(message, accept_blank).upper()
+        print(data)
         if not data and accept_blank:
             None
-        if data.upper() not in VALID_ARGUMENTS:
+        if data not in VALID_ARGUMENTS:
             raise ValueError(
-                colored(f"Respuesta Invalidad: {VALID_ARGUMENTS}", "red"))
-        value = [CHECK if data.upper() == argument
-                 else NO_CHECK for argument in VALID_ARGUMENTS]
+                colored(f"Respuesta Invalidad! Debe colocar {VALID_ARGUMENTS}", "red"))
+        value = [CHECK for argument in VALID_ARGUMENTS if data == argument]
         return value[0]
     except ValueError as ex:
         print(f"Error: {ex}")
