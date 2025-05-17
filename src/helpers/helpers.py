@@ -60,8 +60,8 @@ def get_bool(message: str, accept_blank: bool = True) -> Optional[bool]:
         if data not in VALID_ARGUMENTS:
             raise ValueError(
                 colored(f"Respuesta Invalidad! Debe colocar {VALID_ARGUMENTS}", "red"))
-        value = [CHECK for argument in VALID_ARGUMENTS if data == argument]
-        return value[0]
+        value = [CHECK for argument in ("SI", "S") if data == argument]
+        return value[0] if value else NO_CHECK
     except ValueError as ex:
         print(f"Error: {ex}")
         return get_bool(message, accept_blank)
