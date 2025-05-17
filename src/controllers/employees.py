@@ -1,8 +1,7 @@
 from typing import Optional
 
 from src.data.data import employees_db
-from src.helpers.helpers import clear_console, sleep_menu, get_string, get_int
-from src.config.constants import CHEQUEADO, NO_CHEQUEADO
+from src.helpers.helpers import clear_console, sleep_menu, get_string, get_int, get_bool
 
 
 def view_employed():
@@ -21,13 +20,14 @@ def add_employed():
     last_name: str = get_string("Apellido: ", accept_blank=False)
     dni: str = get_int("DNI: ", accept_blank=False)
     position: str = get_string("Puesto: ", accept_blank=False)
-    check: str = input("Apto fisico con estudios (si), sin estudios (no): ")
+    check: str = get_bool(
+        "Apto fisico con estudios (si), sin estudios (no): ", accept_blank=False)
     employee = {
         "nombre": name,
         "apellido": last_name,
         "dni": dni,
         "puesto": position,
-        "apto": CHEQUEADO if check.lower() == "si" else NO_CHEQUEADO
+        "apto": check
     }
     employees_db.append(employee)
     print(f"Empleado agregado!")
@@ -41,23 +41,15 @@ def update_employed():
     employee = __find_employee()
     if employee is None:
         return
-    new_name: str = input("Ingrese el nuevo Nombre: ")
-    new_LastName: str = input("Ingrese el nuevo Apellido: ")
-    new_dni: str = input("Ingrese el nuevo DNI: ").zfill(8)
-    new_position: str = input("Ingrese el nuevo puesto: ")
-    new_check: str = input(
-        "Ingrese el nuevo estado con estudios (si), sin estudios (no): ")
-    if new_name:
-        employee["nombre"] = new_name.title()
-    if new_LastName:
-        employee["apellido"] = new_LastName.title()
-    if new_dni:
-        employee["dni"] = f"{new_dni[:2]}.{new_dni[2:5]}.{new_dni[5:]}"
-    if new_position:
-        employee["puesto"] = new_position
-    if new_check:
-        employee["apto"] = CHEQUEADO if new_check.lower(
-        ) == "si" else NO_CHEQUEADO
+    employee["nombre"] = get_string(
+        "Ingrese el nuevo Nombre: ") or employee["nombre"]
+    employee["apellido"] = get_string(
+        "Ingrese el nuevo Apellido: ") or employee["apellido"]
+    employee["dni"] = get_int("Ingrese el nuevo DNI: ") or employee["dni"]
+    employee["puesto"] = get_string(
+        "Ingrese el nuevo puesto: ") or employee["puesto"]
+    employee["apto"] = get_bool(
+        "Ingrese el nuevo estado con estudios (si), sin estudios (no): ") or employee["apto"]
     print("Datos del empleado actualizados con exito.")
     sleep_menu(1)
 

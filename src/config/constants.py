@@ -1,2 +1,2 @@
-CHEQUEADO = "✅"
-NO_CHEQUEADO = "❌"
+CHECK = "✅"
+NO_CHECK = "❌"

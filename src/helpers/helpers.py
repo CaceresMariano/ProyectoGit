@@ -2,7 +2,9 @@ import os
 from time import sleep
 from typing import Optional
 
-from termcolor import cprint
+from termcolor import cprint, colored
+
+from src.config.constants import CHECK, NO_CHECK
 
 
 def sleep_menu(time: int = 2):
@@ -48,5 +50,18 @@ def get_int(message: str, accept_blank: bool = True) -> Optional[int]:
         return get_int(message, accept_blank)
 
 
-def get_bool():
-    pass
+def get_bool(message: str, accept_blank: bool = True) -> Optional[bool]:
+    VALID_ARGUMENTS = ("SI", "NO", "S", "N")
+    try:
+        data = get_string(message, accept_blank)  # código que puede fallar
+        if not data and accept_blank:
+            None
+        if data.upper() not in VALID_ARGUMENTS:
+            raise ValueError(
+                colored(f"Respuesta Invalidad: {VALID_ARGUMENTS}", "red"))
+        value = [CHECK if data.upper() == argument
+                 else NO_CHECK for argument in VALID_ARGUMENTS]
+        return value[0]
+    except ValueError as ex:
+        print(f"Error: {ex}")
+        return get_bool(message, accept_blank)
