@@ -1,10 +1,13 @@
 from termcolor import cprint
 
-from src.controllers.employees import add_employed, view_employed, update_employed, delete_employed
+from src.controllers import crud
+from src.data.data import load_employees
 from src.helpers.helpers import clear_console, sleep_menu
 from src.helpers.helpers import mostrar_menu
 
+
 def run():
+    load_employees()
     while True:
         clear_console()
         mostrar_menu()
@@ -12,13 +15,13 @@ def run():
 
         match opcion:
             case "1":
-                add_employed()
+                crud.add_employed()
             case "2":
-                view_employed()
+                crud.view_employed()
             case "3":
-                update_employed()
+                crud.update_employed()
             case "4":
-                delete_employed()
+                crud.delete_employed()
             case "0":
                 cprint("👋Saliendo del programa...", "magenta", attrs=["bold"])
                 break
